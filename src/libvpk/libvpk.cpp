@@ -17,8 +17,8 @@ bool de_is_read = 0;
 vpkfile::~vpkfile() {}
 vpkfile::vpkfile(std::ifstream &TheFile) : File(TheFile){}
 DirInfo vpkfile::getDirInfo() {
-if (!di_is_read)
-{
+//if (!di_is_read)
+//{
 	File.seekg(-9, std::ios::end);
 	if (File.rdstate() != 0)
 	{
@@ -36,7 +36,7 @@ if (!di_is_read)
 	}
 	std::cout << "File count: " << di.m_uFileCount << ", Directory Offset: " << di.m_uDirectoryOffset << ", Type: " << (int) di.m_uType << " sizeof(DirInfo) == " << sizeof(DirInfo) << std::endl;
 	di_is_read = 1;
-}
+//}
 	return di;
 }
 
@@ -54,8 +54,8 @@ DirEntry vpkfile::getDirEntry() {
 }
 
 DirEntry * vpkfile::getListEntry() {
-if (!de_is_read)
-{
+//if (!de_is_read)
+//{
 	de = new DirEntry[di.m_uFileCount];
 	File.seekg(di.m_uDirectoryOffset, std::ios::beg);
 	if (File.rdstate() != 0)
@@ -68,7 +68,7 @@ if (!de_is_read)
 		de[i] = getDirEntry();
 	}
 	de_is_read = 1;
-}
+//}
 	return de;
 }
 

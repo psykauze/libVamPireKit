@@ -10,7 +10,7 @@ Except as contained in this notice, the name of Psykauze shall not be used in ad
 #include <fstream>
 #include <stdio.h>
 #include <stdlib.h>
-#include "libvpk.h"
+#include "../libvpk/libvpk.h"
 
 std::string getTempDirectory(void)
 {
@@ -71,9 +71,10 @@ void extractListFile(DirEntry * ListEntry, DirInfo TheHead, std::ifstream &TheFi
 	return;
 }
 
-int main(int argc, char* argv[])
+int main(int argc, char** argv)
 {
 	std::ifstream hFile;
+std::cout << argv[1] << " : " << argc << std::endl;
 	hFile.open(argv[1]);
 	vpkfile Testconstruc(hFile);
 	DirInfo New = Testconstruc.getDirInfo();
@@ -88,7 +89,7 @@ int main(int argc, char* argv[])
 	std::string logFilefile;
 	logFilefile=getTempDirectory() + "/vpklog.txt";
 	logFile.open(logFilefile.c_str(),std::ios::out);
-	extractListFile(Test,New,hFile,"/media/stockage/Activision",logFile);
+	extractListFile(Test,New,hFile,getTempDirectory() + "/Activision",logFile);
 /*	// Creating a logFile
 	std::ofstream logFile;
 	std::string logFilefile;
